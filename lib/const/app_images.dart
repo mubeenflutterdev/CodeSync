@@ -6,4 +6,15 @@ class AppImages {
       'assets/images/on_boarding_images/onBoarding2.png';
   static final String onBoardingImages3 =
       'assets/images/on_boarding_images/onBoarding3.png';
+
+  /// this images are using in authentaction screens
+  static final String loginImage = 'assets/images/auth_images/auth_image.png';
+  static final String signUpImage = 'assets/images/auth_images/auth_image.png';
+  static final String forgetImage =
+      'assets/images/auth_images/forget_image.png';
+  static final String oTPImage = 'assets/images/auth_images/otp_image.png';
+
+  static final String changePasswordImage =
+      'assets/images/auth_images/change_password_image.png';
+  static final String sucessImage = 'assets/images/auth_images/sucess.png';
 }

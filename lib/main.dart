@@ -1,4 +1,5 @@
-import 'package:codesync/presentation/user_view/on_boarding_screen.dart';
+import 'package:codesync/presentation/auth_view/login_screen.dart';
+
 import 'package:codesync/provider/ui_provider/on_boarding_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: OnBoardingScreen(),
+            home: LoginScreen(),
           );
         },
       ),

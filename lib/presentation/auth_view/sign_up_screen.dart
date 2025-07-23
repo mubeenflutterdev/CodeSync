@@ -1,26 +1,24 @@
-// ignore_for_file: avoid_print
-
 import 'package:codesync/const/app_colors.dart';
 import 'package:codesync/const/app_images.dart';
-import 'package:codesync/presentation/auth_view/forget_password_screen.dart';
-import 'package:codesync/presentation/auth_view/sign_up_screen.dart';
+import 'package:codesync/presentation/auth_view/login_screen.dart';
 import 'package:codesync/presentation/user_view/api_screen.dart';
 import 'package:codesync/widgets/buttons/button_component.dart';
 import 'package:codesync/widgets/input_fields/text_form_field_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final formKey = GlobalKey<FormState>();
   TextEditingController userNameControler = TextEditingController();
   TextEditingController passwordControler = TextEditingController();
+  TextEditingController emailControler = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
               Image.asset(AppImages.loginImage),
 
-              Text('Sign in to your account'),
+              Text('Sign Up to your account'),
               SizedBox(height: 30.h),
 
               TextFormFieldComponent(
                 hintText: 'Username',
                 prefixIcon: Icons.person,
+
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return '';
@@ -50,8 +49,21 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 20.h),
               TextFormFieldComponent(
+                hintText: 'Email',
+                prefixIcon: Icons.email,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '';
+                  }
+                  return null;
+                },
+                controller: emailControler,
+              ),
+              SizedBox(height: 20.h),
+              TextFormFieldComponent(
                 hintText: 'Password',
                 prefixIcon: Icons.lock,
+
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return '';
@@ -60,33 +72,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 controller: passwordControler,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 32.w, top: 5.h),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ForgetPasswordScreen(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Forget Password ?',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+
               SizedBox(height: 50.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.w),
                 child: ButtonComponent(
-                  text: 'SignIn',
+                  text: 'Sign Up',
                   onTap: () {
                     if (formKey.currentState!.validate()) {
                       Navigator.push(
@@ -99,20 +90,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
               ),
-              SizedBox(height: 120.h),
+              SizedBox(height: 70.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Don’t have an account? ', style: TextStyle()),
+                  Text('Have an account? ', style: TextStyle()),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SignUpScreen()),
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
                       );
                     },
                     child: Text(
-                      'Sign Up',
+                      'Sign In',
                       style: TextStyle(
                         color: AppColors.backgroundColor,
                         fontWeight: FontWeight.bold,

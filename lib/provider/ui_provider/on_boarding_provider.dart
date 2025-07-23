@@ -36,7 +36,6 @@ class OnBoardingProvider with ChangeNotifier {
         context,
         MaterialPageRoute(builder: (context) => LoginScreen()),
       );
-      print('Pressed');
     }
   }
 

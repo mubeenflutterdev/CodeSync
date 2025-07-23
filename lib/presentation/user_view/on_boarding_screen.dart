@@ -38,7 +38,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     padding: const EdgeInsets.all(16),
                     child: GestureDetector(
                       onTap: () {
-                        print("✅ Skip button tapped");
                         onBoardingProvider.skip(context);
                       },
                       child: Text(
@@ -77,7 +76,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18.sp,
-                                color: AppColors.whiteColor,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -89,7 +88,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               textAlign: TextAlign.center,
 
                               style: TextStyle(
-                                color: AppColors.whiteColor,
+                                color: AppColors.white,
 
                                 fontWeight: FontWeight.w400,
                               ),
@@ -107,7 +106,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   controller: onBoardingProvider.pageControler,
                   count: onBoardingProvider.pages.length,
                   effect: WormEffect(
-                    activeDotColor: AppColors.whiteColor,
+                    activeDotColor: AppColors.white,
                     dotHeight: 12,
                     dotWidth: 12,
                   ),
@@ -125,7 +124,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       width: double.infinity,
                       height: 40.h,
                       decoration: BoxDecoration(
-                        color: AppColors.whiteColor,
+                        color: AppColors.white,
                         borderRadius: BorderRadius.circular(50.r),
                       ),
                       child: Center(

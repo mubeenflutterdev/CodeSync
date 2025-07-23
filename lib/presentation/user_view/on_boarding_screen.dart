@@ -56,15 +56,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 /// PageView
                 Expanded(
                   child: PageView.builder(
-                    
                     controller: onBoardingProvider.pageControler,
                     itemCount: onBoardingProvider.pages.length,
                     onPageChanged: (index) {
                       onBoardingProvider.changePage(index);
                     },
-                    
+
                     itemBuilder: (context, index) {
-                      
                       final page = onBoardingProvider.pages[index];
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,

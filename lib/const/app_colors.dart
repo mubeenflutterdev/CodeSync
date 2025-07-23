@@ -29,4 +29,5 @@ class AppColors {
   // Custom Brand Colors (optional)
   static const Color backgroundColor = Color(0xff174060);
   static const Color lightBackgroundColor = Color(0xff3290D9);
+  static const Color textBlueColor = Color(0xff3290D9);
 }

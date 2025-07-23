@@ -2,7 +2,7 @@
 
 import 'package:codesync/const/app_colors.dart';
 import 'package:codesync/const/app_images.dart';
-import 'package:codesync/presentation/auth_view/otp_screen.dart';
+
 import 'package:codesync/utils/dialog/sucess_dialog.dart';
 import 'package:codesync/widgets/buttons/button_component.dart';
 import 'package:codesync/widgets/input_fields/text_form_field_component.dart';
@@ -56,7 +56,7 @@ class _ChnagePasswordScreenState extends State<ChnagePasswordScreen> {
                   }
                   return null;
                 },
-                controller: confirmNewPasswordControler,
+                controller: newPasswordControler,
               ),
               SizedBox(height: 40.h),
 

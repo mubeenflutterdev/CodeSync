@@ -1,4 +1,6 @@
 import 'package:codesync/presentation/auth_view/login_screen.dart';
+import 'package:codesync/presentation/user_view/bottom_navigation_bar_screen.dart';
+import 'package:codesync/provider/ui_provider/bottom_nvaigation_provider.dart';
 
 import 'package:codesync/provider/ui_provider/on_boarding_provider.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<OnBoardingProvider>(
           create: (_) => OnBoardingProvider(),
         ),
+        ChangeNotifierProvider<BottomNvaigationProvider>(
+          create: (_) => BottomNvaigationProvider(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: Size(360, 690),
@@ -27,7 +32,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: LoginScreen(),
+            home: BottomNavigationBarScreen(),
           );
         },
       ),

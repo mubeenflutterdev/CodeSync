@@ -25,7 +25,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             /// Background curve at bottom
             Align(
               alignment: Alignment.bottomCenter,
-              child: CurvedTopBackground(height: 490),
+              child: CurvedTopBackground(height: 550.h),
             ),
 
             /// Main content
@@ -56,26 +56,28 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 /// PageView
                 Expanded(
                   child: PageView.builder(
+                    
                     controller: onBoardingProvider.pageControler,
                     itemCount: onBoardingProvider.pages.length,
                     onPageChanged: (index) {
                       onBoardingProvider.changePage(index);
                     },
+                    
                     itemBuilder: (context, index) {
+                      
                       final page = onBoardingProvider.pages[index];
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(page['image'].toString(), height: 250),
-                          SizedBox(height: 20),
+                          Image.asset(page['image'].toString()),
+                          SizedBox(height: 20.h),
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 100,
-                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 45.w),
                             child: Text(
                               page['title'].toString(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
+                                fontWeight: FontWeight.bold,
                                 fontSize: 18.sp,
                                 color: AppColors.whiteColor,
                               ),
@@ -83,56 +85,61 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           ),
                           SizedBox(height: 10),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 80.w),
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: Text(
                               page['desc'].toString(),
                               textAlign: TextAlign.center,
-                              style: TextStyle(color: AppColors.whiteColor),
-                            ),
-                          ),
-                          SizedBox(height: 10.h),
-                          SmoothPageIndicator(
-                            controller: onBoardingProvider.pageControler,
-                            count: onBoardingProvider.pages.length,
-                            effect: WormEffect(
-                              activeDotColor: AppColors.whiteColor,
-                              dotHeight: 8,
-                              dotWidth: 8,
-                            ),
-                          ),
-                          SizedBox(height: 50),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 100,
-                            ),
-                            child: GestureDetector(
-                              onTap: () {
-                                onBoardingProvider.nextPage(context);
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                height: 40.h,
-                                decoration: BoxDecoration(
-                                  color: AppColors.whiteColor,
-                                  borderRadius: BorderRadius.circular(50.r),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    onBoardingProvider.currentIndex ==
-                                            onBoardingProvider.pages.length - 1
-                                        ? 'Get Started'
-                                        : 'Next',
-                                    style: TextStyle(
-                                      color: AppColors.backgroundColor,
-                                    ),
-                                  ),
-                                ),
+
+                              style: TextStyle(
+                                color: AppColors.whiteColor,
+
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),
+                          // SizedBox(height: 30.h),
+
+                          // SizedBox(height: 50),
                         ],
                       );
                     },
+                  ),
+                ),
+                SmoothPageIndicator(
+                  controller: onBoardingProvider.pageControler,
+                  count: onBoardingProvider.pages.length,
+                  effect: WormEffect(
+                    activeDotColor: AppColors.whiteColor,
+                    dotHeight: 12,
+                    dotWidth: 12,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 100,
+                    vertical: 40,
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      onBoardingProvider.nextPage(context);
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 40.h,
+                      decoration: BoxDecoration(
+                        color: AppColors.whiteColor,
+                        borderRadius: BorderRadius.circular(50.r),
+                      ),
+                      child: Center(
+                        child: Text(
+                          onBoardingProvider.currentIndex ==
+                                  onBoardingProvider.pages.length - 1
+                              ? 'Get Started'
+                              : 'Next',
+                          style: TextStyle(color: AppColors.backgroundColor),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],

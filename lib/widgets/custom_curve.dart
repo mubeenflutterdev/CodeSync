@@ -22,12 +22,12 @@ class TopDeepCurveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();
-    path.moveTo(0, 150); // deeper start
+    path.moveTo(0, 130); // deeper start
     path.quadraticBezierTo(
       size.width / 2,
       0, // dip point
       size.width,
-      150, // end of the curve
+      130, // end of the curve
     );
     path.lineTo(size.width, size.height); // right down
     path.lineTo(0, size.height); // left down

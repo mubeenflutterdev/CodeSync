@@ -1,6 +1,7 @@
 import 'package:codesync/const/app_colors.dart';
 import 'package:codesync/const/app_images.dart';
 import 'package:codesync/presentation/user_view/api_screen.dart';
+import 'package:codesync/provider/feature_provider/auth_provider.dart';
 
 import 'package:codesync/routes/route_names.dart';
 import 'package:codesync/widgets/buttons/button_component.dart';
@@ -8,6 +9,7 @@ import 'package:codesync/widgets/input_fields/text_form_field_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -82,17 +84,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 50.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.w),
-                child: ButtonComponent(
-                  text: 'Sign Up',
-                  onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ApiScreen()),
-                      );
-                    } else {
-                      print("Validation failed");
-                    }
+                child: Consumer<AuthentactionProvider>(
+                  builder: (context, provider, child) {
+                    return ButtonComponent(
+                      text: 'Sign Up',
+                      onTap: () {
+                        final email = emailControler.text.trim();
+                        final password = passwordControler.text.trim();
+                        final name = userNameControler.text.trim();
+                        if (formKey.currentState!.validate()) {
+                          provider.signUpUser(context, email, password, name);
+                        } else {
+                          print("Validation failed");
+                        }
+                      },
+                    );
                   },
                 ),
               ),

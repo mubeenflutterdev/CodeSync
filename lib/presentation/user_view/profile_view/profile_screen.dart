@@ -2,8 +2,10 @@
 
 import 'package:codesync/const/app_colors.dart';
 import 'package:codesync/const/app_images.dart';
+import 'package:codesync/provider/feature_provider/auth_provider.dart';
 import 'package:codesync/provider/feature_provider/profile_provider.dart';
 import 'package:codesync/widgets/buttons/button_component.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -45,10 +47,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             SizedBox(height: 50),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: ButtonComponent(
-                text: 'Logout',
-                onTap: () {},
-                isLogoutButton: true,
+              child: Consumer<AuthentactionProvider>(
+                builder: (context, proivder, child) {
+                  return ButtonComponent(
+                    text: 'Logout',
+                    onTap: () {
+                      proivder.signOut(context);
+                    },
+                    isLogoutButton: true,
+                  );
+                },
               ),
             ),
           ],

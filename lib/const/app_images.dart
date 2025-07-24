@@ -17,4 +17,6 @@ class AppImages {
   static final String changePasswordImage =
       'assets/images/auth_images/change_password_image.png';
   static final String sucessImage = 'assets/images/auth_images/sucess.png';
+  static final String googleImage = 'assets/icons/google_ic.svg';
+  static final String facebookImage = 'assets/icons/facebook_ic.svg';
 }

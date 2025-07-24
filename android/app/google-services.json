@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "586143236644",
+    "project_id": "pickuplines-82369",
+    "storage_bucket": "pickuplines-82369.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586143236644:android:092b71ef950b7b43ad0eb1",
+        "android_client_info": {
+          "package_name": "com.example.codesync"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586143236644-vnn83357afhnkh4nmld7jgh07ffac1cr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzskA7Qev-kY6b_HIi9hL23M4bBqeKnT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586143236644-vnn83357afhnkh4nmld7jgh07ffac1cr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

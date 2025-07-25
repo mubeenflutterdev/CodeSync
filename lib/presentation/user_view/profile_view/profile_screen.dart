@@ -3,14 +3,13 @@
 import 'package:codesync/const/app_colors.dart';
 import 'package:codesync/const/app_images.dart';
 import 'package:codesync/provider/feature_provider/auth_provider.dart';
-import 'package:codesync/provider/feature_provider/profile_provider.dart';
+import 'package:codesync/provider/feature_provider/user_info_provider.dart';
 import 'package:codesync/widgets/buttons/button_component.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
-import 'package:codesync/presentation/view_import.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -21,8 +20,20 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
+  void initState() {
+    super.initState();
+    UserInfoProivder userInfoProivder = Provider.of<UserInfoProivder>(
+      context,
+      listen: false,
+    );
+    userInfoProivder.getUserInfo(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    ProfileProvider profileProvider = Provider.of<ProfileProvider>(context);
+    AuthentactionProvider authentactionProvider =
+        Provider.of<AuthentactionProvider>(context);
+    UserInfoProivder profileProvider = Provider.of<UserInfoProivder>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -108,7 +119,7 @@ class DetailsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProfileProvider>(
+    return Consumer<UserInfoProivder>(
       builder: (context, provider, child) {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),

@@ -2,7 +2,7 @@ import 'package:codesync/firebase_options.dart';
 import 'package:codesync/presentation/auth_view/sign_up_screen.dart';
 import 'package:codesync/provider/feature_provider/auth_provider.dart';
 
-import 'package:codesync/provider/feature_provider/profile_provider.dart';
+import 'package:codesync/provider/feature_provider/user_info_provider.dart';
 import 'package:codesync/provider/ui_provider/bottom_nvaigation_provider.dart';
 
 import 'package:codesync/provider/ui_provider/on_boarding_provider.dart';
@@ -37,8 +37,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<BottomNvaigationProvider>(
           create: (_) => BottomNvaigationProvider(),
         ),
-        ChangeNotifierProvider<ProfileProvider>(
-          create: (_) => ProfileProvider(),
+        ChangeNotifierProvider<UserInfoProivder>(
+          create: (_) => UserInfoProivder(),
         ),
         ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
         ChangeNotifierProvider<PasswordHideProvider>(

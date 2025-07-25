@@ -158,13 +158,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(width: 28.w),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      AuthentactionProvider authentactionProvider =
+                          Provider.of<AuthentactionProvider>(
+                            context,
+                            listen: false,
+                          );
+                      authentactionProvider.signInWithGoogle(context);
+                    },
                     child: Container(
                       height: 56.h,
                       width: 80.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r),
-                        border: Border.all(color: AppColors.grey),
+                        border: Border.all(
+                          color: const Color.fromARGB(255, 235, 15, 15),
+                        ),
                       ),
                       child: Center(
                         child: SvgPicture.asset(AppImages.googleImage),

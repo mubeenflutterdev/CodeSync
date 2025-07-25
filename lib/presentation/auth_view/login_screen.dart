@@ -101,6 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Consumer<AuthentactionProvider>(
                   builder: (context, provider, child) {
                     return ButtonComponent(
+                      isLoading: provider.isSignInLoading,
                       text: 'SignIn',
                       onTap: () {
                         if (formKey.currentState!.validate()) {
@@ -143,7 +144,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      AuthentactionProvider authentactionProvider =
+                          Provider.of<AuthentactionProvider>(
+                            context,
+                            listen: false,
+                          );
+                      authentactionProvider.signInWithFacebook(context);
+                    },
                     child: Container(
                       height: 56.h,
                       width: 80.w,
@@ -171,9 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 80.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r),
-                        border: Border.all(
-                          color: const Color.fromARGB(255, 235, 15, 15),
-                        ),
+                        border: Border.all(color: AppColors.grey),
                       ),
                       child: Center(
                         child: SvgPicture.asset(AppImages.googleImage),

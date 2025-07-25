@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_local_variable
 
 import 'package:codesync/const/app_colors.dart';
 import 'package:codesync/const/app_images.dart';
@@ -77,6 +77,7 @@ class _ChnagePasswordScreenState extends State<ChnagePasswordScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.w),
                 child: ButtonComponent(
+                  isLoading: false,
                   text: 'Continue',
                   onTap: () {
                     String forgetEmail = confirmNewPasswordControler.text

@@ -2,7 +2,7 @@ import 'package:codesync/const/app_colors.dart';
 import 'package:codesync/const/app_images.dart';
 import 'package:codesync/presentation/auth_view/change_password_screen.dart';
 import 'package:codesync/widgets/buttons/button_component.dart';
-import 'package:codesync/widgets/input_fields/text_form_field_component.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -100,6 +100,7 @@ class _OtpScreenState extends State<OtpScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.w),
                 child: ButtonComponent(
+                  isLoading: false,
                   text: 'Continue',
                   onTap: () {
                     if (formKey.currentState!.validate()) {

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:codesync/const/app_colors.dart';
 import 'package:codesync/provider/ui_provider/on_boarding_provider.dart';
 import 'package:codesync/widgets/custom_curve.dart';
@@ -14,6 +16,15 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  @override
+  void initState() {
+    super.initState();
+   WidgetsBinding.instance.addPostFrameCallback((_) {
+    Provider.of<OnBoardingProvider>(context, listen: false).setOnboardingStatus();
+  });
+   
+  }
+
   @override
   Widget build(BuildContext context) {
     final onBoardingProvider = Provider.of<OnBoardingProvider>(context);

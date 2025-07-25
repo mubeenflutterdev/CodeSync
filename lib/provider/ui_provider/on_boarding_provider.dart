@@ -1,10 +1,12 @@
 import 'package:codesync/const/app_images.dart';
 import 'package:codesync/presentation/auth_view/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 class OnBoardingProvider with ChangeNotifier {
   int currentIndex = 0;
   final pageControler = PageController();
+  bool isSeen = false;
 
   final List<Map<String, String>> pages = [
     {
@@ -49,6 +51,17 @@ class OnBoardingProvider with ChangeNotifier {
 
   void changePage(int index) {
     currentIndex = index;
+    notifyListeners();
+  }
+
+  void setOnboardingStatus() async {
+    final storage = GetStorage();
+    await storage.write('isSeen', true);
+  }
+
+  void getOnboardingStatus() async {
+    final storage = GetStorage();
+    isSeen = storage.read('isSeen') ?? false;
     notifyListeners();
   }
 }

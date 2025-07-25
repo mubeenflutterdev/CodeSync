@@ -1,13 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:codesync/model/user_model.dart';
 import 'package:codesync/presentation/user_view/profile_view/profile_screen.dart';
 import 'package:codesync/provider/feature_provider/user_info_provider.dart';
 import 'package:codesync/routes/route_names.dart';
 import 'package:codesync/utils/toast_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
@@ -123,11 +122,15 @@ class AuthentactionProvider with ChangeNotifier {
     }
   }
 
-  /// google signin
+  /// google signin ... user downgraded version of google auth package (google_sign_in: ^6.2.1)
   Future<void> signInWithGoogle(BuildContext context) async {
     //there we initilize get device token controller
 
     try {
+      UserInfoProivder userInfoProivder = Provider.of<UserInfoProivder>(
+        context,
+        listen: false,
+      );
       final GoogleSignInAccount? googleSignInAccount = await googleSignIn
           .signIn();
       if (googleSignInAccount != null) {
@@ -146,15 +149,68 @@ class AuthentactionProvider with ChangeNotifier {
         String name = user.displayName.toString();
         String imgUrl = user.photoURL.toString();
         String phone = user.phoneNumber.toString();
+        userInfoProivder.addUserInfo(
+          context,
+          email,
+          password,
+          name,
+          imgUrl,
+          phone,
+        );
 
-        Navigator.pushNamed(context, AppRouteName.profileScreen);
-
-        if (user != null) {}
+        if (user != null) {
+          Navigator.pushNamed(context, AppRouteName.profileScreen);
+        }
       }
     } catch (e) {
       // EasyLoading.dismiss();
       print(e.toString());
       ToastUtil.showToast(context, message: e.toString());
+    }
+  }
+
+  /// facebook signin but not tested
+  Future<void> signInWithFacebook(BuildContext context) async {
+    try {
+      isSignInLoading = true;
+      notifyListeners();
+
+      final LoginResult result = await FacebookAuth.instance.login();
+
+      if (result.status == LoginStatus.success) {
+        final AccessToken accessToken = result.accessToken!;
+        final OAuthCredential credential = FacebookAuthProvider.credential(
+          accessToken.token,
+        );
+
+        final UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithCredential(credential);
+        final User? user = userCredential.user;
+
+        if (user != null) {
+          String email = user.email ?? 'No Email';
+          String password = 'Facebook Password';
+          String name = user.displayName ?? 'No Name';
+          String imgUrl = user.photoURL ?? '';
+          String phone = user.phoneNumber ?? '';
+
+          Provider.of<UserInfoProivder>(
+            context,
+            listen: false,
+          ).addUserInfo(context, email, password, name, imgUrl, phone);
+
+          Navigator.pushNamed(context, AppRouteName.profileScreen);
+        }
+      } else if (result.status == LoginStatus.cancelled) {
+        ToastUtil.showToast(context, message: 'Facebook login cancelled');
+      } else {
+        ToastUtil.showToast(context, message: result.message ?? 'Login failed');
+      }
+    } catch (e) {
+      ToastUtil.showToast(context, message: e.toString());
+    } finally {
+      isSignInLoading = false;
+      notifyListeners();
     }
   }
 }

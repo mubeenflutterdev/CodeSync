@@ -87,6 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Consumer<AuthentactionProvider>(
                   builder: (context, provider, child) {
                     return ButtonComponent(
+                      isLoading: provider.isSignUpLoading,
                       text: 'Sign Up',
                       onTap: () {
                         final email = emailControler.text.trim();

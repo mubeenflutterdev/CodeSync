@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 
 class UserInfoProivder with ChangeNotifier {
   UserModel? userInfo;
+  bool isLoading = false;
 
   ///    demo data anf methods not necessory
   String gender = '';
@@ -29,6 +30,8 @@ class UserInfoProivder with ChangeNotifier {
 
   Future getUserInfo(BuildContext context) async {
     try {
+      isLoading = true;
+      notifyListeners();
       final ref = FirebaseFirestore.instance;
       final userId = FirebaseAuth.instance.currentUser!.uid;
       DocumentSnapshot snapshot = await ref
@@ -46,6 +49,9 @@ class UserInfoProivder with ChangeNotifier {
       }
     } catch (e) {
       ToastUtil.showToast(context, message: e.toString());
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
   }
 

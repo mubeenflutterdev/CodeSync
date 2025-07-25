@@ -68,6 +68,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.w),
                 child: ButtonComponent(
+                  isLoading: false,
                   text: 'Continue',
                   onTap: () {
                     String forgetEmail = forgetControler.text.toString();

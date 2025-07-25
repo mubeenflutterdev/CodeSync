@@ -1,9 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:codesync/const/app_images.dart';
+import 'package:codesync/provider/ui_provider/on_boarding_provider.dart';
 import 'package:codesync/routes/route_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,18 +25,20 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _checkUser() async {
-    await Future.delayed(Duration(seconds: 2)); // Optional splash delay
+    final storage = GetStorage();
+    bool isSeen = storage.read('isSeen') ?? false;
 
-    User? user = FirebaseAuth.instance.currentUser;
+    await Future.delayed(const Duration(seconds: 2)); // Optional splash delay
 
-    // 🔁 Try again if still null (for Web/Mobile cold starts)
-    for (int i = 0; i < 5 && user == null; i++) {
-      await Future.delayed(Duration(milliseconds: 300));
-      user = FirebaseAuth.instance.currentUser;
-    }
+    // Wait for Firebase to emit the first auth state
+    User? user = await FirebaseAuth.instance.authStateChanges().first;
+
+    if (!mounted) return;
 
     if (user != null && user.emailVerified) {
       Navigator.pushReplacementNamed(context, AppRouteName.profileScreen);
+    } else if (!isSeen) {
+      Navigator.pushReplacementNamed(context, AppRouteName.onboardingScreen);
     } else {
       Navigator.pushReplacementNamed(context, AppRouteName.logInScreen);
     }

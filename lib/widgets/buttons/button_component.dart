@@ -8,21 +8,20 @@ class ButtonComponent extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
   final bool isLogoutButton;
+  bool isLoading;
 
-  const ButtonComponent({
+  ButtonComponent({
     super.key,
     required this.text,
     required this.onTap,
     this.isLogoutButton = false,
+    required this.isLoading,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final authProvider = Provider.of<AuthentactionProvider>(context);
-
-    final isLoading =
-        authProvider.isSignInLoading || authProvider.isSignUpLoading;
 
     return GestureDetector(
       onTap: () {

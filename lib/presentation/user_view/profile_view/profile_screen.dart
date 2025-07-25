@@ -5,6 +5,7 @@ import 'package:codesync/const/app_images.dart';
 import 'package:codesync/provider/feature_provider/auth_provider.dart';
 import 'package:codesync/provider/feature_provider/user_info_provider.dart';
 import 'package:codesync/widgets/buttons/button_component.dart';
+import 'package:codesync/widgets/shimmer/shimmer_box.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,45 +34,73 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     AuthentactionProvider authentactionProvider =
         Provider.of<AuthentactionProvider>(context);
-    UserInfoProivder profileProvider = Provider.of<UserInfoProivder>(context);
+    UserInfoProivder userInfoProivder = Provider.of<UserInfoProivder>(context);
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            /// profile 1st container
-            ProfileImageSectionComponent(),
-            //// text button
-            Padding(
-              padding: EdgeInsets.only(left: 24.w, top: 20.h, bottom: 10.h),
-              child: Text(
-                'USer Details',
-                style: TextStyle(
-                  color: AppColors.backgroundColor,
-                  fontSize: 16.sp,
-                ),
-              ),
-            ),
+        child: userInfoProivder.isLoading == true
+            ? Column(
+                children: [
+                  Center(
+                    child: ShimmerBox(height: 300, width: double.infinity),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: Consumer<AuthentactionProvider>(
+                      builder: (context, proivder, child) {
+                        return ButtonComponent(
+                          isLoading: proivder.isSignUpLoading,
+                          text: 'Logout',
+                          onTap: () {
+                            proivder.signOut(context);
+                          },
+                          isLogoutButton: true,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// profile 1st container
+                  ProfileImageSectionComponent(),
+                  //// text button
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 24.w,
+                      top: 20.h,
+                      bottom: 10.h,
+                    ),
+                    child: Text(
+                      'USer Details',
+                      style: TextStyle(
+                        color: AppColors.backgroundColor,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ),
 
-            /// details secction
-            DetailsComponent(),
-            SizedBox(height: 50),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Consumer<AuthentactionProvider>(
-                builder: (context, proivder, child) {
-                  return ButtonComponent(
-                    text: 'Logout',
-                    onTap: () {
-                      proivder.signOut(context);
-                    },
-                    isLogoutButton: true,
-                  );
-                },
+                  /// details secction
+                  DetailsComponent(),
+                  SizedBox(height: 50),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: Consumer<AuthentactionProvider>(
+                      builder: (context, proivder, child) {
+                        return ButtonComponent(
+                          isLoading: false,
+                          text: 'Logout',
+                          onTap: () {
+                            proivder.signOut(context);
+                          },
+                          isLogoutButton: true,
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -83,6 +112,8 @@ class ProfileImageSectionComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserInfoProivder userInfoProivder = Provider.of<UserInfoProivder>(context);
+
     return Container(
       height: 268.h,
       width: double.infinity,
@@ -106,7 +137,10 @@ class ProfileImageSectionComponent extends StatelessWidget {
             backgroundImage: AssetImage(AppImages.changePasswordImage),
           ),
           SizedBox(height: 20.h),
-          Text('Mubeen', style: TextStyle(color: AppColors.white)),
+          Text(
+            'Hello ' + userInfoProivder.userInfo!.fullName.toString(),
+            style: TextStyle(color: AppColors.white),
+          ),
         ],
       ),
     );
@@ -553,6 +587,7 @@ class CustomDialogComponent {
 
                   /// SAVE BUTTON
                   ButtonComponent(
+                    isLoading: false,
                     text: "Save",
                     onTap: () {
                       Navigator.pop(context);

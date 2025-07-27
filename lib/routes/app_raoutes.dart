@@ -2,6 +2,7 @@ import 'package:codesync/presentation/auth_view/login_screen.dart';
 import 'package:codesync/presentation/auth_view/sign_up_screen.dart';
 import 'package:codesync/presentation/auth_view/splash_screen.dart';
 import 'package:codesync/presentation/user_view/on_boarding_screen.dart';
+import 'package:codesync/presentation/user_view/profile_view/profile_details_screen.dart';
 import 'package:codesync/presentation/user_view/profile_view/profile_screen.dart';
 
 import 'package:codesync/routes/route_names.dart';
@@ -24,6 +25,8 @@ class Routes {
         return MaterialPageRoute(builder: (context) => OnBoardingScreen());
       case AppRouteName.profileScreen:
         return MaterialPageRoute(builder: (context) => ProfileScreen());
+      case AppRouteName.profileDetailsScreen:
+        return MaterialPageRoute(builder: (context) => ProfileDetailsScreen());
       default:
         return MaterialPageRoute(
           builder: (context) {

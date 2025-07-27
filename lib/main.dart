@@ -2,12 +2,14 @@ import 'package:codesync/firebase_options.dart';
 import 'package:codesync/provider/feature_provider/auth_provider.dart';
 import 'package:codesync/provider/feature_provider/user_info_provider.dart';
 import 'package:codesync/provider/ui_provider/bottom_nvaigation_provider.dart';
+import 'package:codesync/provider/ui_provider/image_picker_provider.dart';
 import 'package:codesync/provider/ui_provider/on_boarding_provider.dart';
 import 'package:codesync/provider/ui_provider/password_hide_provider.dart';
 import 'package:codesync/provider/ui_provider/theme_provider.dart';
 import 'package:codesync/routes/app_raoutes.dart' show Routes;
 import 'package:codesync/routes/route_names.dart' show AppRouteName;
 import 'package:codesync/theme/theme_data.dart';
+import 'package:codesync/widgets/shimmer/profile_screen_shimmer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,8 +28,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- 
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<OnBoardingProvider>(
@@ -46,6 +46,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<AuthentactionProvider>(
           create: (_) => AuthentactionProvider(),
         ),
+         ChangeNotifierProvider<ImagePickerProvider>(
+          create: (_) => ImagePickerProvider(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: Size(360, 690),
@@ -58,6 +61,7 @@ class MyApp extends StatelessWidget {
             darkTheme: CustomTheme.darkTheme,
             themeMode: themeProvider.currentTheme,
             debugShowCheckedModeBanner: false,
+            
             initialRoute: AppRouteName.splashScreen,
             onGenerateRoute: Routes.generateRoute,
           );

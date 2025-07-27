@@ -4,4 +4,5 @@ class AppRouteName {
   static const String signupScreen = '/signup_screen';
   static const String onboardingScreen = '/onboarding_screen';
   static const String profileScreen = '/profile_screen';
+  static const String profileDetailsScreen = '/profile_details_screen';
 }

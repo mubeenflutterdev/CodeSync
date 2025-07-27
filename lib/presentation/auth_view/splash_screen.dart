@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(AppImages.onBoardingImages1),
+          Center(child: Image.asset(AppImages.onBoardingImages1)),
           RichText(text: TextSpan(children: [])),
         ],
       ),
